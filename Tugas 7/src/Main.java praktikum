@@ -1,0 +1,62 @@
+package praktikum;
+
+public class Main {
+    public static void main(String[] args) {
+        Kue[] arrayKue = new Kue[20];
+
+        // Isi array dengan berbagai jenis kue
+        arrayKue[0] = new KuePesanan("Brownies", 15000, 0.5);
+        arrayKue[1] = new KuePesanan("Nastar", 25000, 0.3);
+        arrayKue[2] = new KuePesanan("Lapis Legit", 30000, 0.7);
+        arrayKue[3] = new KueJadi("Bolu", 10000, 5);
+        arrayKue[4] = new KueJadi("Kue Lumpur", 12000, 8);
+        // Isi array dengan kue lainnya...
+
+        // Tampilkan semua kue beserta jenisnya
+        System.out.println("Daftar Kue:");
+        for (Kue kue : arrayKue) {
+            System.out.println(kue);
+        }
+
+        // Hitung total harga dari semua jenis kue
+        double totalHargaSemuaKue = 0;
+        for (Kue kue : arrayKue) {
+            totalHargaSemuaKue += kue.hitungHarga();
+        }
+        System.out.println("Total harga semua kue: Rp " + totalHargaSemuaKue);
+
+        // Hitung total harga dan total berat dari KuePesanan
+        double totalHargaKuePesanan = 0;
+        double totalBeratKuePesanan = 0;
+        for (Kue kue : arrayKue) {
+            if (kue instanceof KuePesanan) {
+                totalHargaKuePesanan += kue.hitungHarga();
+                totalBeratKuePesanan += ((KuePesanan) kue).berat;
+            }
+        }
+        System.out.println("Total harga KuePesanan: Rp " + totalHargaKuePesanan);
+        System.out.println("Total berat KuePesanan: " + totalBeratKuePesanan + " kg");
+
+        // Hitung total harga dan total jumlah dari KueJadi
+        double totalHargaKueJadi = 0;
+        double totalJumlahKueJadi = 0;
+        for (Kue kue : arrayKue) {
+            if (kue instanceof KueJadi) {
+                totalHargaKueJadi += kue.hitungHarga();
+                totalJumlahKueJadi += ((KueJadi) kue).jumlah;
+            }
+        }
+        System.out.println("Total harga KueJadi: Rp " + totalHargaKueJadi);
+        System.out.println("Total jumlah KueJadi: " + totalJumlahKueJadi);
+
+        // Tampilkan informasi kue dengan harga (harga akhir) terbesar
+        Kue kueTerbesar = arrayKue[0];
+        for (Kue kue : arrayKue) {
+            if (kue.hitungHarga() > kueTerbesar.hitungHarga()) {
+                kueTerbesar = kue;
+            }
+        }
+        System.out.println("Informasi kue dengan harga terbesar:");
+        System.out.println(kueTerbesar);
+    }
+}
